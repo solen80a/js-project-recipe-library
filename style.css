@@ -5,8 +5,7 @@ body{
 
 h1{
   color: #0018A4;
-  font-size: 64px;   
-  border:2px solid #0018A4
+  font-size: 64px; 
 }
 
 h3{
@@ -36,6 +35,12 @@ font-size: 22px;
   border: 2px solid #0018A4;  
 }
 
+
+.filter-button-select{  
+  background: #0018A4;
+  color:  #FFF;
+} 
+
 .sort-buttons{
   border-radius: 50px;
   background: #FFECEA;
@@ -51,6 +56,12 @@ font-size: 22px;
   border: 2px solid #0018A4;
   background: #FF6589;
   color: #FFF;  
+}
+
+
+.sort-buttons-select{
+  background: #FF6589;
+  color: #FFF;
 }
 
 .recipe-cards{
