@@ -1,16 +1,11 @@
 console.log("hej hej") 
 //What´s the differens between these 2?
-document.getElementById('filter-section-buttons').addEventListener('click', function(event) {
+document.getElementById('filter-section').addEventListener('click', function(event) {
   if (event.target.classList.contains('filter-button')) {
       event.target.classList.toggle('filter-button-select');
   }
   console.log("hej min apelsiner") 
 });
-
-//
-// document.querySelectorAll(".sort-buttons").forEach(button => 
-//   button.addEventListener("click", () => button.classList.toggle("sort-buttons-select"))  
-// );
 
 //
 const sortbuttons = document.getElementById("sort-section-buttons")
@@ -20,19 +15,22 @@ const message = document.getElementById("filter-sort-message")
 
 //Some way to bundle these two?
 
-sortButtonA.addEventListener("click", () => {
+sortButtonA.addEventListener("click", (event) => {
+  event.preventDefault()
   console.log("sortButtonA button was clicked")
   sortButtonA.classList.toggle("sort-buttons-select")
   message.textContent = "Most popular first"
+  
 })
 
-sortButtonD.addEventListener("click", () => {
+sortButtonD.addEventListener("click", (event) => {
+  event.preventDefault()
   console.log("sortButtonD button was clicked")
   sortButtonD.classList.toggle("sort-buttons-select")
-  message.textContent = "Not so popular first"
+  message.textContent = "Not so popular first"  
 })
 
-message()
+//message()
     
 //  
 

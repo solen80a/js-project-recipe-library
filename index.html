@@ -12,118 +12,59 @@
   </header>
 
  <main>
-  <section id="filter-section" class="filter-section">
-    <div id="filter-section-buttons" class="filter-section-buttons">
-      <h3>Filter on diets</h3>
+  <section class="filter-sort-section">
+  <h3 class="filter-h3">Filter on diets</h3>
+  <form id="filter-section" class="filter-section">      
+    <label class="filter-section-buttons">      
       <button id="filter-button-all" class="filter-button">All</button>
-      <button  id="filter-button-vegan" class="filter-button">Vegan</button>
-      <button  id="filter-button-vegetarian" class="filter-button">Vegetarian</button>
-      <button  id="filter-button-gluten-free" class="filter-button">Gluten-free</button>
-      <button  id="filter-button-dairy-free" class="filter-button">Dairy-free</button>
-    </div>
-  </section>
-
-  <section class="sort-section">
-    <div id="sort-section-buttons" class="sort-section-buttons">
-      <h3>Sort by popularity</h3>
+    </label>
+    <label class="filter-section-buttons"> 
+      <button id="filter-button-vegan" class="filter-button">Vegan</button>
+    </label>
+    <label class="filter-section-buttons"> 
+      <button id="filter-button-vegetarian" class="filter-button">Vegetarian</button>
+    </label>
+    <label class="filter-section-buttons">
+      <button id="filter-button-gluten-free" class="filter-button">Gluten-free</button>
+    </label>
+    <label class="filter-section-buttons">
+        <button id="filter-button-dairy-free" class="filter-button">Dairy-free</button>
+    </label>
+  </form>
+  <h3 class="sort-h3">Sort by popularity</h3>
+  <form class="sort-section">   
+    <label id="sort-section-button-ascending" class="sort-section-buttons">      
       <button id="sort-button-ascending" class="sort-buttons">Ascending</button>
+    </label>
+    <label id="sort-section-button-descending" class="sort-section-buttons">
       <button id="sort-button-descending" class="sort-buttons">Descending</button>
-    </div>
-  </section>
-
+    </label>
+  </form>
+</section>
  
-  <section id="recipe-cards" class="recipe-cards"></section>
+  <section id="recipe-cards" class="recipe-cards">
   <article id="filter-sort-message" class="recipe-card">
     <h3>Where did you click:</h3>
+    <img 
+    id="recipe-card-image" 
+    class="recipe-card-image" 
+    src="./Images/Placeholder recipe card.png">  
   </article>
   <article id="recipe-card1" class="recipe-card">
+    <h3>Placeholder image</h3>
     <img 
     id="recipe-card-image" 
     class="recipe-card-image" 
-    src="./Images_Video/veggies.webp">
-    <h3></h3>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, quae? 
-      Minima tenetur doloremque totam sequi voluptatum explicabo fugit temporibus 
-      optio deleniti quasi sapiente expedita, accusantium a architecto odio, 
-      illo beatae!</p>
+    src="./Images/Placeholder recipe card.png">   
   </article>
   <article id="recipe-card2" class="recipe-card">
+    <h3>Placeholder image</h3>
     <img 
     id="recipe-card-image" 
     class="recipe-card-image" 
-    src="./Images_Video/veggies.webp">
-    <h3></h3>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, quae? 
-      Minima tenetur doloremque totam sequi voluptatum explicabo fugit temporibus 
-      optio deleniti quasi sapiente expedita, accusantium a architecto odio, 
-      illo beatae!</p>
+    src="./Images/Placeholder recipe card.png">   
   </article>
-  <article id="recipe-card3" class="recipe-card">
-    <img 
-    id="recipe-card-image" 
-    class="recipe-card-image" 
-    src="./Images_Video/veggies.webp">
-    <h3></h3>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, quae? 
-      Minima tenetur doloremque totam sequi voluptatum explicabo fugit temporibus 
-      optio deleniti quasi sapiente expedita, accusantium a architecto odio, 
-      illo beatae!</p>
-  </article>
-  <article id="recipe-card4" class="recipe-card">
-    <img 
-    id="recipe-card-image" 
-    class="recipe-card-image" 
-    src="./Images_Video/veggies.webp">
-    <h3></h3>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, quae? 
-      Minima tenetur doloremque totam sequi voluptatum explicabo fugit temporibus 
-      optio deleniti quasi sapiente expedita, accusantium a architecto odio, 
-      illo beatae!</p>
-  </article>
-  <article id="recipe-card5" class="recipe-card">
-    <img 
-    id="recipe-card-image" 
-    class="recipe-card-image" 
-    src="./Images_Video/veggies.webp">
-    <h3></h3>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, quae? 
-      Minima tenetur doloremque totam sequi voluptatum explicabo fugit temporibus 
-      optio deleniti quasi sapiente expedita, accusantium a architecto odio, 
-      illo beatae!</p>
-  </article>
-  <article id="recipe-card6" class="recipe-card">
-    <img 
-    id="recipe-card-image" 
-    class="recipe-card-image" 
-    src="./Images_Video/veggies.webp">
-    <h3></h3>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, quae? 
-      Minima tenetur doloremque totam sequi voluptatum explicabo fugit temporibus 
-      optio deleniti quasi sapiente expedita, accusantium a architecto odio, 
-      illo beatae!</p>
-  </article>
-  <article id="recipe-card7" class="recipe-card">
-    <img 
-    id="recipe-card-image" 
-    class="recipe-card-image" 
-    src="./Images_Video/veggies.webp">
-    <h3></h3>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, quae? 
-      Minima tenetur doloremque totam sequi voluptatum explicabo fugit temporibus 
-      optio deleniti quasi sapiente expedita, accusantium a architecto odio, 
-      illo beatae!</p>
-  </article>
-  <article id="recipe-card8" class="recipe-card">
-    <img 
-    id="recipe-card-image" 
-    class="recipe-card-image" 
-    src="./Images_Video/veggies.webp">
-    <h3></h3>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, quae? 
-      Minima tenetur doloremque totam sequi voluptatum explicabo fugit temporibus 
-      optio deleniti quasi sapiente expedita, accusantium a architecto odio, 
-      illo beatae!</p>
-  </article>
+</section>
   
 </main>
   
