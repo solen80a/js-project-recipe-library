@@ -32,37 +32,38 @@
     </label>
   </form>
   <h3 class="sort-h3">Sort by popularity</h3>
-  <form class="sort-section">   
-    <label id="sort-section-button-ascending" class="sort-section-buttons">      
-      <button id="sort-button-ascending" class="sort-buttons">Ascending</button>
+  <form id="sort-section-buttons">   
+    <label id="sort-button-ascending" class="sort-buttons"> 
+      Most popular     
+      <input type="radio" name="sort-button" value="ascending">
+      <!-- <button id="sort-button-ascending" class="sort-buttons">Ascending</button> -->
     </label>
-    <label id="sort-section-button-descending" class="sort-section-buttons">
-      <button id="sort-button-descending" class="sort-buttons">Descending</button>
+    <label  id="sort-button-descending" class="sort-buttons">
+      Least popular
+      <input type="radio" name="sort-button-ascending" value="descending">
+      <!-- <button id="sort-button-descending" class="sort-buttons">Descending</button> -->
     </label>
   </form>
 </section>
  
   <section id="recipe-cards" class="recipe-cards">
-  <article id="filter-sort-message" class="recipe-card">
+  <article  class="recipe-card">
     <h3>Where did you click:</h3>
-    <img 
-    id="recipe-card-image" 
-    class="recipe-card-image" 
-    src="./Images/Placeholder recipe card.png">  
+    <div id="filter-sort-message"></div>
   </article>
   <article id="recipe-card1" class="recipe-card">
     <h3>Placeholder image</h3>
-    <img 
-    id="recipe-card-image" 
-    class="recipe-card-image" 
-    src="./Images/Placeholder recipe card.png">   
+    <div><img 
+      id="recipe-card-image" 
+      class="recipe-card-image" 
+      src="./Images/Placeholder recipe card.png"> </div>      
   </article>
   <article id="recipe-card2" class="recipe-card">
     <h3>Placeholder image</h3>
-    <img 
-    id="recipe-card-image" 
-    class="recipe-card-image" 
-    src="./Images/Placeholder recipe card.png">   
+    <div><img 
+      id="recipe-card-image" 
+      class="recipe-card-image" 
+      src="./Images/Placeholder recipe card.png">  </div>     
   </article>
 </section>
   
