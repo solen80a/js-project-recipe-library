@@ -132,5 +132,9 @@ input{
   grid-column: 2 / 3;
   grid-row: 1 / 2;
 }
- 
 
+/* Desktop Widescreen*/
+@media (min-width: 769px) {
+
+
+}

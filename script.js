@@ -26,35 +26,35 @@ filterAll.addEventListener("click", (event) => {
   event.preventDefault()
   console.log("filterAll button was clicked")
   filterAll.classList.toggle("filter-button-select")
-  message.textContent += "All recipies are displayed."
+  message.innerHTML += `<p>All recipies are displayed.</p>` 
 })
 
 filterVegan.addEventListener("click", (event) => {
   event.preventDefault()
   console.log("filterVegan button was clicked")
   filterVegan.classList.toggle("filter-button-select")
-  message.textContent += "Vegan recipies are displayed."  
+  message.innerHTML += `<p>Vegan recipies are displayed.</p>` 
 })
 
 filterVeg.addEventListener("click", (event) => {
   event.preventDefault()
   console.log("filterVeg button was clicked")
   filterVeg.classList.toggle("filter-button-select")
-  message.textContent += "Vegetarian recipies are displayed."  
+  message.innerHTML += `<p>Vegetarian recipies are displayed.</p>` 
 })
 
 filterGluten.addEventListener("click", (event) => {
   event.preventDefault()
   console.log("filterGluten button was clicked")
-  filterGluten.classList.toggle("filter-button-select")
-  message.textContent += "Gluten-free recipies are displayed."  
+  filterGluten.classList.toggle("filter-button-select")  
+  message.innerHTML += `<p>Gluten-free recipies are displayed.</p>` 
 })
 
 filterDairy.addEventListener("click", (event) => {
   event.preventDefault()
   console.log("FilterDairy button was clicked")
   filterDairy.classList.toggle("filter-button-select")
-  message.textContent += "Dairy-free recipies are displayed."  
+  message.innerHTML += `<p>Dairy-free recipies are displayed.</p>` 
 })
 
 //
