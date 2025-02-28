@@ -7,7 +7,7 @@ const filterVeg = document.getElementById("filter-button-vegetarian")
 const filterGluten = document.getElementById("filter-button-gluten-free")
 const filterDairy = document.getElementById("filter-button-dairy-free")
 
-const sortbuttons = document.getElementById("sort-section-buttons")
+const sortbuttons = document.getElementById("sort-section")
 const sortButtonA = document.getElementById("sort-button-ascending")
 const sortButtonD = document.getElementById("sort-button-descending")
 const message = document.getElementById("filter-sort-message")
