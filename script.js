@@ -1,29 +1,3 @@
-
-let filterButton = document.querySelectorAll (".filter-button")
-
-filterButton.forEach((button) => {
-  button.addEventListener("click", (event) => {
-    event.preventDefault()
-    console.log("Any filter button was clicked")
-    event.target.classList.toggle("filter-button-select")     
-  })
-})
-
-let sortButton = document.querySelectorAll(".sort-button");
-
-sortButton.forEach((sortButton) => {
-  sortButton.addEventListener("change", (event) => {  // Use "change" instead of "click" for radio buttons
-    console.log("A sort button was selected");
-
-    // Remove class from all buttons first (so only one is active)
-    sortButton.forEach((btn) => btn.classList.remove(".sort-buttons-select"));
-
-    // Add class only to the selected radio button
-    event.target.classList.add("sort-buttons-select");
-  });
-});
-
-// An array of mockup recipes week 6
 const recipes = [
   {
     id: 1,
@@ -186,26 +160,125 @@ const recipes = [
   }
 ]
 
-const recipeCards = document.querySelectorAll(".recipe-card"); // Selects all `.recipe-card` elements
+const recipeCards = document.getElementById("recipe-card"); // Selects all `.recipe-card` elements
+const filterButton = document.querySelectorAll (".filter-button")
+const filterVegan = document.querySelector ("#filter-button-vegan")
+const filterVeggi = document.querySelector ("#filter-button-vegetarian")
+const filterGluten = document.querySelector ("#filter-button-gluten-free")
+const filterDairy = document.querySelector ("#filter-button-dairy-free")
 
-//Change to list <li></li> index could probably be any name!!!
- recipes.forEach((recipe, content) => {
-   if (recipeCards[content]) { 
-     recipeCards[content].innerHTML = `
-       
-         <img 
-         src="${recipe.image}" 
-         alt="${recipe.title}" 
-         class="recipe-card-image"> 
-         <div class="recipe-card-content">       
-         <h2>${recipe.title}</h2>
-         <p><strong>Cuisine:</strong> ${recipe.cuisine}</p>
-         <p><strong>Time:</strong> ${recipe.readyInMinutes} minutes</p>
-         <p><strong>Ingredients:</strong></p>
-         <li class="recipe-card-content">${recipe.ingredients.join("<br>")}
-         </li>
-        </div>`;
-   }
- });
+// recipes.forEach((recipe, content) => {
+//   if (recipeCards[content]) { 
+//     recipeCards[content].innerHTML = `
+      
+//          <img 
+//          src="${recipe.image}" 
+//          alt="${recipe.title}" 
+//          class="recipe-card-image"> 
+//         <div class="recipe-card-content">                
+//          <h2>${recipe.title}</h2> 
+//        <div class="recipe-cards-common">        
+//          <p><strong>Cuisine:</strong> ${recipe.cuisine}</p>
+//          <p><strong>Time:</strong> ${recipe.readyInMinutes} minutes</p>
+//        </div>  
+//          <p><strong>Ingredients:</strong></p>            
+//          <li class="recipe-card-content">${recipe.ingredients.join("<br>")}
+//          </li>
+//        </div>`;
+//   }
+// });
+
+// filterButton.forEach((button) => {
+//   button.addEventListener("click", (event) => {
+//     event.preventDefault()
+//     console.log("Any filter button was clicked")
+//     event.target.classList.toggle("filter-button-select")     
+//   })
+// })
+
+const loadRecipes = (recipeArray) => {
+  recipeCards.innerHTML = "" //resets the container before we loada the dogs
+  recipeArray.forEach(recipe => {
+    recipeCards.innerHTML += 
+        `<div class="recipe-card">
+        <img 
+          src="${recipe.image}" 
+          alt="${recipe.title}" 
+          class="recipe-card-image"> 
+        <div class="recipe-card-content">                
+          <h2>${recipe.title}</h2> 
+        <div class="recipe-cards-common">        
+          <p><strong>Cuisine:</strong> ${recipe.cuisine}</p>
+          <p><strong>Time:</strong> ${recipe.readyInMinutes} minutes</p>
+        </div>  
+          <p><strong>Ingredients:</strong></p>            
+          <li class="recipe-card-content">${recipe.ingredients.join("<br>")}
+          </li>
+        </div>
+        </div>
+        `
+  })
+}
+
+const filterRecipe = (dietsValue) => {  
+  const filteredArray = recipes.filter(recipe => recipe.diets.includes(dietsValue))
+  console.log(`Vegan recipies:`, filteredArray)
+  //console.log(recipes)
+  loadRecipes(filteredArray)
+}
+
+
+
+filterVegan.addEventListener("click", (event) => {
+    event.preventDefault()
+    console.log("Vegan filter button was clicked")
+    event.target.classList.toggle("filter-button-select") 
+    filterRecipe("vegan")    
+})
+
+filterVeggi.addEventListener("click", (event) => {
+  event.preventDefault()
+  console.log("Vegetarian filter button was clicked")
+  event.target.classList.toggle("filter-button-select") 
+  filterRecipe("vegetarian")    
+})
+
+filterGluten.addEventListener("click", (event) => {
+  event.preventDefault()
+  console.log("Gluten-free filter button was clicked")
+  event.target.classList.toggle("filter-button-select") 
+  filterRecipe("gluten-free")    
+})
+
+filterDairy.addEventListener("click", (event) => {
+  event.preventDefault()
+  console.log("Dairy-free filter button was clicked")
+  event.target.classList.toggle("filter-button-select") 
+  filterRecipe("dairy-free")    
+})
+
+loadRecipes(recipes)
+
+// const sortButton = document.querySelectorAll(".sort-button");
+
+// sortButton.forEach((sortButton) => {
+//   sortButton.addEventListener("change", (event) => {  // Use "change" instead of "click" for radio buttons
+//     console.log("A sort button was selected");
+
+//     // Remove class from all buttons first (so only one is active)
+//     sortButton.forEach((btn) => btn.classList.remove(".sort-buttons-select"));
+
+//     // Add class only to the selected radio button
+//     event.target.classList.add("sort-buttons-select");
+//   });
+// });
+
+// An array of mockup recipes week 6
+
+
+
+
+
+ 
 
  

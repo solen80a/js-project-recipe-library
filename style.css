@@ -99,9 +99,7 @@ input{
   background: #FFF;
   box-shadow: 0px 0px 30px 0px rgba(0, 24, 164, 0.20);
   border-radius: 16px;
-  padding: 16px 16px 24px 16px;
-  
-  
+  padding: 16px 16px 24px 16px;  
 }
 
 .recipe-card h2{ 
@@ -109,18 +107,21 @@ input{
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  border-bottom: 1px solid #E9E9E9;
+  
 }
 
 .recipe-card strong{
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  line-height: normal;
+  line-height: normal;  
 }
 
 .recipe-card-content{
   display: flex;
-  flex-direction: column;  
+  flex-direction: column; 
+  gap: 16px; 
 }
 
 .recipe-card-image{
@@ -130,6 +131,10 @@ input{
   align-self: stretch; 
   background: lightgray;
  
+}
+
+.recipe-cards-common{
+  border-bottom: 1px solid #E9E9E9;
 }
 
 
