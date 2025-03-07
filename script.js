@@ -160,12 +160,13 @@ const recipes = [
   }
 ]
 
-const recipeCards = document.getElementById("recipe-card"); // Selects all `.recipe-card` elements
+const recipeCards = document.getElementById("recipe-card")
 const filterButton = document.querySelectorAll (".filter-button")
 const filterVegan = document.querySelector ("#filter-button-vegan")
 const filterVeggi = document.querySelector ("#filter-button-vegetarian")
 const filterGluten = document.querySelector ("#filter-button-gluten-free")
 const filterDairy = document.querySelector ("#filter-button-dairy-free")
+const filterAll = document.querySelector ("#filter-button-all")
 
 // recipes.forEach((recipe, content) => {
 //   if (recipeCards[content]) { 
@@ -222,12 +223,18 @@ const loadRecipes = (recipeArray) => {
 
 const filterRecipe = (dietsValue) => {  
   const filteredArray = recipes.filter(recipe => recipe.diets.includes(dietsValue))
-  console.log(`Vegan recipies:`, filteredArray)
+  //console.log(`diets clicked recipies:`, filteredArray)
   //console.log(recipes)
   loadRecipes(filteredArray)
 }
 
-
+//Make the ALL button work, don´t forget to create a const filterAll!
+filterAll.addEventListener("click", (event) => {
+   event.preventDefault()
+   console.log("ALL filter button was clicked")
+   event.target.classList.toggle("filter-button-select") 
+   loadRecipes(recipes)      
+})
 
 filterVegan.addEventListener("click", (event) => {
     event.preventDefault()
