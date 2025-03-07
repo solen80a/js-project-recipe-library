@@ -11,31 +11,33 @@
     <h1>Recipe Library</h1>   
   </header>
 
- <main>
-  <section class="filter-sort-section">
-  <h2 class="filter-h3">Filter on diets</h2>
-  <form id="filter-section" class="filter-section">      
-    <label class="filter-section-buttons">      
-      <button id="filter-button-all" class="filter-button">All</button>
-    </label>
-    <label class="filter-section-buttons"> 
-      <button id="filter-button-vegan" class="filter-button">Vegan</button>
-    </label>
-    <label class="filter-section-buttons"> 
-      <button id="filter-button-vegetarian" class="filter-button">Vegetarian</button>
-    </label>
-    <label class="filter-section-buttons">
-      <button id="filter-button-gluten-free" class="filter-button">Gluten-free</button>
-    </label>
-    <label class="filter-section-buttons">
-        <button id="filter-button-dairy-free" class="filter-button">Dairy-free</button>
-    </label>
-    <label class="filter-section-buttons">
-      <button id="filter-button-random" class="filter-button">Show a random recipe</button>
+ <main>   
   </label>
-  </form>
+    <section class="filter-sort-section">      
+      <button id="random-button" class="random-button">🎁 Suprice me 🎁</button>            
+      <h2 class="filter-h3">Filter on diets</h2>
+      <form id="filter-section" class="filter-section">      
+        <label class="filter-section-buttons">      
+          <button id="filter-button-all" class="filter-button">All</button>
+        </label>
+        <label class="filter-section-buttons"> 
+          <button id="filter-button-vegan" class="filter-button">Vegan</button>
+        </label>
+        <label class="filter-section-buttons"> 
+          <button id="filter-button-vegetarian" class="filter-button">Vegetarian</button>
+        </label>
+        <label class="filter-section-buttons">
+          <button id="filter-button-gluten-free" class="filter-button">Gluten-free</button>
+        </label>
+        <label class="filter-section-buttons">
+            <button id="filter-button-dairy-free" class="filter-button">Dairy-free</button>
+        </label>   
+        <label class="filter-section-buttons">
+          <button id="filter-button-dead" class="filter-button">☠️</button>
+      </label>  
+      </form>
   <h2 class="sort-h3">Sort by popularity</h2>
-  <form id="sort-section">   
+  <form id="sort-section" class="sort-section">   
     <label id="sort-button-ascending" class="sort-buttons"> 
       Most popular     
       <input type="radio" name="sort-button" value="ascending" class="sort-button">
@@ -49,7 +51,7 @@
   </form>
 </section> 
 <section id="recipe-cards" class="recipe-cards">
-  <article id="recipe-card" > 
+  <article id="recipe-card"> 
     <!-- <li></li> -->
   </article>
   <!-- <article id="recipe-card2" class="recipe-card">

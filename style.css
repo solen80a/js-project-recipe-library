@@ -15,7 +15,7 @@ h1{
 main{
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  flex-wrap: wrap;  
   padding: 8px 16px; 
   gap: 10px; 
 }
@@ -32,17 +32,32 @@ font-size: 22px;
 .filter-sort-section{
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.random-button{
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  border-radius: 50px;
+  background: #FF6589;
+  color: #FFFF;
+  text-align: center;
+  font-size: 18px;
+  border: none;
+  width: 280px;
 }
 
 .filter-h3{
   grid-column: 1 / 2;
-  grid-row: 1 / 2;
+  grid-row: 2 / 3;
 }
 
-.filter-button{
+.filter-section{
   grid-column: 1 / 2;
-  grid-row: 2 / 3;
+  grid-row: 3 / 4;
+}
+
+.filter-button{  
   border-radius: 50px;
   background: #CCFFE2;
   color: #0018A4;
@@ -63,12 +78,15 @@ input{
 
 .sort-h3{
   grid-column: 1 / 2;
-  grid-row: 3 / 4;
+  grid-row: 4 / 5;
 }
 
-.sort-buttons{
+.sort-section{
   grid-column: 1 / 2;
-  grid-row: 4 / 5;
+  grid-row: 5 / 6;
+}
+
+.sort-buttons{  
   border-radius: 50px;
   background: #FFECEA;
   color: #0018A4;
@@ -84,22 +102,24 @@ input{
 }
 
 .recipe-cards{
-  display: grid;  
-  grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 23%, 340px), 1fr));
-  gap: .3em;
+
   
 }
 
-.recipe-card{  
-  /* display: flex; 
-  flex-direction: column; */
-    
+#recipe-card{  
+  display: grid;  
+  grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 23%, 340px), 1fr));
+  gap: .3em;
+}
+
+.recipe-card-img-content-common{
   row-gap: 32px;
   border: 2px solid #0018A4;
   background: #FFF;
   box-shadow: 0px 0px 30px 0px rgba(0, 24, 164, 0.20);
   border-radius: 16px;
   padding: 16px 16px 24px 16px;  
+
 }
 
 .recipe-card h2{ 
@@ -142,27 +162,24 @@ input{
 @media (min-width: 769px) {
   .filter-sort-section{    
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
   }
 
-  .filter-h3{
-   grid-column: 1 / 2;
-   grid-row: 1 / 2; 
-  }
-
+ 
   .filter-button:hover{
     border: 2px solid #0018A4;  
   }
 
   .sort-h3{
     grid-column: 2 / 3;
-    grid-row: 1 / 2;
-  }
-
-  .sort-buttons{
-    grid-column: 2 / 3;
     grid-row: 2 / 3;
   }
+
+  .sort-section{
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+  }
+
 
   .sort-buttons:hover{
     border-radius: 50px;

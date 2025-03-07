@@ -1,3 +1,4 @@
+
 const recipes = [
   {
     id: 1,
@@ -167,6 +168,10 @@ const filterVeggi = document.querySelector ("#filter-button-vegetarian")
 const filterGluten = document.querySelector ("#filter-button-gluten-free")
 const filterDairy = document.querySelector ("#filter-button-dairy-free")
 const filterAll = document.querySelector ("#filter-button-all")
+const filterDead = document.querySelector ("#filter-button-dead")
+const randomRecipe = document.querySelector("#random-button")
+
+
 
 // recipes.forEach((recipe, content) => {
 //   if (recipeCards[content]) { 
@@ -201,7 +206,7 @@ const loadRecipes = (recipeArray) => {
   recipeCards.innerHTML = "" //resets the container before we loada the dogs
   recipeArray.forEach(recipe => {
     recipeCards.innerHTML += 
-        `<div class="recipe-card">
+      `<div class="recipe-card-img-content-common">
         <img 
           src="${recipe.image}" 
           alt="${recipe.title}" 
@@ -216,7 +221,7 @@ const loadRecipes = (recipeArray) => {
           <li class="recipe-card-content">${recipe.ingredients.join("<br>")}
           </li>
         </div>
-        </div>
+      </div>
         `
   })
 }
@@ -225,8 +230,18 @@ const filterRecipe = (dietsValue) => {
   const filteredArray = recipes.filter(recipe => recipe.diets.includes(dietsValue))
   //console.log(`diets clicked recipies:`, filteredArray)
   //console.log(recipes)
-  loadRecipes(filteredArray)
+  if (filteredArray.length === 0) {
+    recipeCards.innerHTML = `<p>☠️ Sorry, no recipes found for this filter ☠️ </p>`;
+  } else {
+    loadRecipes(filteredArray);
+  }
 }
+
+randomRecipe.addEventListener("click", () => {
+  console.log("random button clicked")
+  const randomArray = Math.floor(Math.random() * recipes.length)
+  loadRecipes([recipes[randomArray]]);
+}) 
 
 //Make the ALL button work, don´t forget to create a const filterAll!
 filterAll.addEventListener("click", (event) => {
@@ -262,6 +277,12 @@ filterDairy.addEventListener("click", (event) => {
   console.log("Dairy-free filter button was clicked")
   event.target.classList.toggle("filter-button-select") 
   filterRecipe("dairy-free")    
+})
+
+filterDead.addEventListener("click", (event) => {
+  event.preventDefault()
+  console.log("This is a dead end")
+  filterRecipe("dead")
 })
 
 loadRecipes(recipes)
