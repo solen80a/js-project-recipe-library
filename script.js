@@ -258,6 +258,58 @@ const fetchData = async () => {
   }
 })
 
+//Filter recipes on diets
+filterVeggi.addEventListener("click", (event) => {
+  event.preventDefault()
+  console.log("Vegetarian filter button was clicked")
+  event.target.classList.toggle("filter-button-select") 
+
+  const vegetarianRecipes = fetchedRecipes.filter(recipe => recipe.vegetarian);
+
+  if (vegetarianRecipes.length > 0){
+    recipeAPI.innerHTML = ""; // Clear previous content
+
+    vegetarianRecipes.forEach((recipe) => {
+      const ingredientsList = recipe.extendedIngredients
+        .map((ingredient) => `<li>${ingredient.original}</li>`)
+        .join("");
+
+
+    // Clear and display only the vegetarian recipe
+    recipeAPI.innerHTML += `
+    <div class="recipe-card-img-content-common">
+      <img src="${recipe.image}" alt="${recipe.title}" class="recipe-card-image"> 
+      <div class="recipe-card-content">                
+        <h2>${recipe.title}</h2> 
+        <div class="recipe-cards-common">        
+          <p><strong>Cuisine:</strong> ${recipe.cuisines.join(", ") || "Unknown"}</p>
+          <p><strong>Time:</strong> ${recipe.readyInMinutes} minutes</p>
+        </div>  
+        <p><strong>Ingredients:</strong></p>
+        <ul class="recipe-card-content">${ingredientsList}</ul>  
+      </div>
+    </div>`;
+    })
+  } else {
+    console.warn("No vegetarian recipes available! Fetching new recipes...");
+    fetchData(); // Fetch recipes if none are available
+  }
+  })
+
+
+
+
+
+     
+
+
+
+ 
+
+//filterVegan.addEventListener("click", filterRecipesDiets)
+//filterVeggi.addEventListener("click", filterRecipesDiets)
+
+
 
 fetchData();
 
@@ -293,40 +345,40 @@ fetchData();
 //   loadRecipes([recipes[randomArray]]);
 // }) 
 
-const filterRecipe = (dietsValue) => {  
-  const filteredArray = recipes.filter(recipe => recipe.diets.includes(dietsValue))
-  //console.log(`diets clicked recipies:`, filteredArray)
-  //console.log(recipes)
-  if (filteredArray.length === 0) {
-    recipeCards.innerHTML = `<p>☠️ Sorry, no recipes found for this filter ☠️ </p>`;
-  } else {
-    loadRecipes(filteredArray);
-  }
-}
+// const filterRecipe = (dietsValue) => {  
+//   const filteredArray = recipes.filter(recipe => recipe.diets.includes(dietsValue))
+//   //console.log(`diets clicked recipies:`, filteredArray)
+//   //console.log(recipes)
+//   if (filteredArray.length === 0) {
+//     recipeCards.innerHTML = `<p>☠️ Sorry, no recipes found for this filter ☠️ </p>`;
+//   } else {
+//     loadRecipes(filteredArray);
+//   }
+// }
 
 
 
 //Make the ALL button work, don´t forget to create a const filterAll!
-filterAll.addEventListener("click", (event) => {
-   event.preventDefault()
-   console.log("ALL filter button was clicked")
-   event.target.classList.toggle("filter-button-select") 
-   loadRecipes(recipes)      
-})
+// filterAll.addEventListener("click", (event) => {
+//    event.preventDefault()
+//    console.log("ALL filter button was clicked")
+//    event.target.classList.toggle("filter-button-select") 
+//    loadRecipes(recipes)      
+// })
 
-filterVegan.addEventListener("click", (event) => {
-    event.preventDefault()
-    console.log("Vegan filter button was clicked")
-    event.target.classList.toggle("filter-button-select") 
-    filterRecipe("vegan")    
-})
+// filterVegan.addEventListener("click", (event) => {
+//     event.preventDefault()
+//     console.log("Vegan filter button was clicked")
+//     event.target.classList.toggle("filter-button-select") 
+//     filterRecipe("vegan")    
+// })
 
-filterVeggi.addEventListener("click", (event) => {
-  event.preventDefault()
-  console.log("Vegetarian filter button was clicked")
-  event.target.classList.toggle("filter-button-select") 
-  filterRecipe("vegetarian")    
-})
+// filterVeggi.addEventListener("click", (event) => {
+//   event.preventDefault()
+//   console.log("Vegetarian filter button was clicked")
+//   event.target.classList.toggle("filter-button-select") 
+//   filterRecipe("vegetarian")    
+// })
 
 filterGluten.addEventListener("click", (event) => {
   event.preventDefault()
