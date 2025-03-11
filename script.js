@@ -239,6 +239,23 @@ fetch("https://api.spoonacular.com/recipes/random?number=10&apiKey=9d61b3a0389f4
 //   })
 // }
 
+randomRecipe.addEventListener("click", () =>{
+  console.log("random button clicked")
+fetch ("https://api.spoonacular.com/recipes/random?number=1&apiKey=9d61b3a0389f408487f429835c7333f9")
+  .then((response) => {
+    return response.json()
+  })
+  .then((json) => {
+
+  })
+})
+
+// randomRecipe.addEventListener("click", () => {
+//   console.log("random button clicked")
+//   const randomArray = Math.floor(Math.random() * recipes.length)
+//   loadRecipes([recipes[randomArray]]);
+// }) 
+
 const filterRecipe = (dietsValue) => {  
   const filteredArray = recipes.filter(recipe => recipe.diets.includes(dietsValue))
   //console.log(`diets clicked recipies:`, filteredArray)
@@ -250,11 +267,7 @@ const filterRecipe = (dietsValue) => {
   }
 }
 
-randomRecipe.addEventListener("click", () => {
-  console.log("random button clicked")
-  const randomArray = Math.floor(Math.random() * recipes.length)
-  loadRecipes([recipes[randomArray]]);
-}) 
+
 
 //Make the ALL button work, don´t forget to create a const filterAll!
 filterAll.addEventListener("click", (event) => {
