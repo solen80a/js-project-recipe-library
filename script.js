@@ -161,6 +161,8 @@
 //   }
 // ]
 
+
+
 const recipeCards = document.getElementById("recipe-card")
 const filterButton = document.querySelectorAll (".filter-button")
 const filterVegan = document.querySelector ("#filter-button-vegan")
@@ -171,49 +173,95 @@ const filterAll = document.querySelector ("#filter-button-all")
 const filterDead = document.querySelector ("#filter-button-dead")
 const randomRecipe = document.querySelector("#random-button")
 
-//const URL = `https://api.spoonacular.com/recipes/random?number=1&apiKey=9d61b3a0389f408487f429835c7333f9`
+//const URL = "https://api.spoonacular.com/recipes/random?number=1&apiKey=9d61b3a0389f408487f429835c7333f9"
 
 //console.log(URL)
 
 const recipeAPI = document.getElementById("recipe-cards-API")
+let fetchedRecipes = []
 
-fetch("https://api.spoonacular.com/recipes/random?number=10&apiKey=9d61b3a0389f408487f429835c7333f9")
-  .then((response) => {
-    return response.json()
-  })
-  .then((json) => {
-   
-    console.log(json)
+ //Fetches recipes from the API
+const fetchData = async () => {
+  try{
+    const response = await fetch("https://api.spoonacular.com/recipes/random?number=10&apiKey=9d61b3a0389f408487f429835c7333f9");
+    const data = await response.json();
+    console.log("what is the data now?", data); 
+
+    fetchedRecipes = data.recipes; // Store recipes globally
+    console.log("Fetched recipes:", fetchedRecipes);
+
     recipeAPI.innerHTML = "" //resets the container before we load recipes
 
-     json.recipes.forEach((recipe) => {
-
+    
+    data.recipes.forEach((recipe) => {  
+      // Convert array to a string of list items ingredients
       const ingredientsList = recipe.extendedIngredients
         .map((ingredient) => `<li>${ingredient.original}</li>`)
-        .join(""); // Convert array to a string of list items
-
-
-       recipeAPI.innerHTML += `<div class="recipe-card-img-content-common">
+        .join("");   
+      //Display the recipe in the card
+      recipeAPI.innerHTML += `
+      <div class="recipe-card-img-content-common">
         <img 
-          src="${recipe.image}" 
-          alt="${recipe.title}" 
-          class="recipe-card-image"> 
+        src="${recipe.image}" 
+        alt="${recipe.title}" 
+        class="recipe-card-image"> 
         <div class="recipe-card-content">                
           <h2>${recipe.title}</h2> 
-        <div class="recipe-cards-common">        
-          <p><strong>Cuisine:</strong> ${recipe.cuisines}</p>
-          <p><strong>Time:</strong> ${recipe.readyInMinutes} minutes</p>
-        </div>  
+          <div class="recipe-cards-common">        
+            <p><strong>Cuisine:</strong> ${recipe.cuisines}</p>
+            <p><strong>Time:</strong> ${recipe.readyInMinutes} minutes</p>
+          </div>  
           <p><strong>Ingredients:</strong></p>
           <ul class="recipe-card-content">
-              ${ingredientsList} <!-- Displaying ingredients as list items -->
-            </ul>  
-        </div>
+            ${ingredientsList} <!-- Displaying ingredients as list items -->
+          </ul>  
+          </div>
       </div>
-        `
-     });
-  })
-  .catch((error) => console.error("Error fetching recipe:", error));
+          `
+        });   
+  } catch (error) {
+          console.error("Error fetching data:", error);
+  }
+}
+           
+
+
+//Get one random recipe
+ randomRecipe.addEventListener("click", () => {
+   console.log("random button clicked", fetchedRecipes)
+
+   if (fetchedRecipes.length > 0) {
+    const randomIndex = Math.floor(Math.random() * fetchedRecipes.length);
+    const selectedRecipe = fetchedRecipes[randomIndex];
+
+    const ingredientsList = selectedRecipe.extendedIngredients
+      .map((ingredient) => `<li>${ingredient.original}</li>`)
+      .join("");
+
+    // Clear and display only the random recipe
+    recipeAPI.innerHTML = `
+    <div class="recipe-card-img-content-common">
+      <img src="${selectedRecipe.image}" alt="${selectedRecipe.title}" class="recipe-card-image"> 
+      <div class="recipe-card-content">                
+        <h2>${selectedRecipe.title}</h2> 
+        <div class="recipe-cards-common">        
+          <p><strong>Cuisine:</strong> ${selectedRecipe.cuisines.join(", ") || "Unknown"}</p>
+          <p><strong>Time:</strong> ${selectedRecipe.readyInMinutes} minutes</p>
+        </div>  
+        <p><strong>Ingredients:</strong></p>
+        <ul class="recipe-card-content">${ingredientsList}</ul>  
+      </div>
+    </div>`;
+  } else {
+    console.warn("No recipes available! Fetching new recipes...");
+    fetchData(); // Fetch recipes if none are available
+  }
+})
+
+
+fetchData();
+
+
 
 // const loadRecipes = (recipeArray) => {
 //   recipeCards.innerHTML = "" //resets the container before we load recipes
@@ -238,17 +286,6 @@ fetch("https://api.spoonacular.com/recipes/random?number=10&apiKey=9d61b3a0389f4
 //         `
 //   })
 // }
-
-randomRecipe.addEventListener("click", () =>{
-  console.log("random button clicked")
-fetch ("https://api.spoonacular.com/recipes/random?number=1&apiKey=9d61b3a0389f408487f429835c7333f9")
-  .then((response) => {
-    return response.json()
-  })
-  .then((json) => {
-
-  })
-})
 
 // randomRecipe.addEventListener("click", () => {
 //   console.log("random button clicked")
