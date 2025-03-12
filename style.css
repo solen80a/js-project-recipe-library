@@ -116,12 +116,16 @@ input{
   display: grid;  
   grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 23%, 340px), 1fr));
   gap: .3em;
+  /* max-width: 268px; */
 }
 
 /* Article */
-/* #recipe-card-API{  
-
-} */
+#recipe-card-API{  
+  /* display: grid;  
+  grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 23%, 340px), 1fr));
+  gap: .3em; */
+  
+}
 
 /* #recipe-card{  
   display: grid;  
@@ -135,7 +139,7 @@ input{
   box-shadow: 0px 0px 30px 0px rgba(0, 24, 164, 0.20);
   border-radius: 16px;
   padding: 16px 16px 24px 16px;  
-
+  max-width: 340px;
 }
 
 .recipe-card-content{
@@ -150,6 +154,7 @@ input{
 
 .recipe-card-image{
   width: 100%; 
+  max-width: 268px;
   border-radius: 12px; 
   align-self: stretch; 
   background: lightgray;

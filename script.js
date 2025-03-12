@@ -314,7 +314,6 @@ filterVeggi.addEventListener("click", () => {
   })
 
   //Sort
-
   document.querySelectorAll(".sort-button").forEach((btn) => {
     btn.addEventListener("change", () => {
       document.querySelectorAll(".sort-button").forEach((otherBtn) => {
@@ -328,21 +327,24 @@ filterVeggi.addEventListener("click", () => {
   });
 
 
-//const sortRecipes = (fetchedRecipes) => {
+  const sortRecipes = (fetchedRecipes, sortAscending) => {
+    if (!Array.isArray(fetchedRecipes)) {
+      console.error("Invalid input: fetchedRecipes must be an array");
+      return [];
+    }
   
-
-    // Remove class from all buttons first (so only one is active)
-    //sortButton.forEach((btn) => btn.classList.remove(".sort-buttons-select"));
-
-    // Add class only to the selected radio button
-    //event.target.classList.add("sort-buttons-select");
- 
+    if (sortAscending) {
+      console.log("Sorting in ascending order (citroner)");
+      fetchedRecipes.sort((a, b) => a.spoonacularScore - b.spoonacularScore);
+    } else {
+      console.log("Sorting in descending order (apelsiner)");
+      fetchedRecipes.sort((a, b) => b.spoonacularScore - a.spoonacularScore);
+    }
+  
+    return fetchedRecipes;
+  }; 
 
   
-
-
-
-
 
 
 
