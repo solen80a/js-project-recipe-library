@@ -172,6 +172,8 @@ const filterDairy = document.querySelector ("#filter-button-dairy-free")
 const filterAll = document.querySelector ("#filter-button-all")
 const filterDead = document.querySelector ("#filter-button-dead")
 const randomRecipe = document.querySelector("#random-button")
+const sortAscending = document.querySelector ("#sort-button-ascending")
+const sortDescending = document.querySelector ("#sort-button-descending")
 
 //const URL = "https://api.spoonacular.com/recipes/random?number=1&apiKey=9d61b3a0389f408487f429835c7333f9"
 
@@ -179,6 +181,7 @@ const randomRecipe = document.querySelector("#random-button")
 
 const recipeAPI = document.getElementById("recipe-cards-API")
 let fetchedRecipes = []
+let recipecontent = []
 
  //Fetches recipes from the API
 const fetchData = async () => {
@@ -190,15 +193,17 @@ const fetchData = async () => {
     fetchedRecipes = data.recipes; // Store recipes globally
     console.log("Fetched recipes:", fetchedRecipes);
 
-    recipeAPI.innerHTML = "" //resets the container before we load recipes
+   
+   
+    recipeAPI.innerHTML = "" //resets the container before we load recipes   
 
-    
+   
     data.recipes.forEach((recipe) => {  
       // Convert array to a string of list items ingredients
       const ingredientsList = recipe.extendedIngredients
         .map((ingredient) => `<li>${ingredient.original}</li>`)
         .join("");   
-      //Display the recipe in the card
+      //Display the recipe in the card      
       recipeAPI.innerHTML += `
       <div class="recipe-card-img-content-common">
         <img 
@@ -218,12 +223,14 @@ const fetchData = async () => {
           </div>
       </div>
           `
-        });   
+        });  
+        
   } catch (error) {
           console.error("Error fetching data:", error);
   }
+ 
 }
-           
+        
 
 
 //Get one random recipe
@@ -234,10 +241,10 @@ const fetchData = async () => {
     const randomIndex = Math.floor(Math.random() * fetchedRecipes.length);
     const selectedRecipe = fetchedRecipes[randomIndex];
 
+    // Convert array to a string of list items ingredients
     const ingredientsList = selectedRecipe.extendedIngredients
       .map((ingredient) => `<li>${ingredient.original}</li>`)
       .join("");
-
     // Clear and display only the random recipe
     recipeAPI.innerHTML = `
     <div class="recipe-card-img-content-common">
@@ -258,23 +265,33 @@ const fetchData = async () => {
   }
 })
 
-//Filter recipes on diets
-filterVeggi.addEventListener("click", (event) => {
-  event.preventDefault()
-  console.log("Vegetarian filter button was clicked")
-  event.target.classList.toggle("filter-button-select") 
+//Filter
+document.querySelectorAll(".filter-button").forEach((btn) => {
+  btn.addEventListener("click", (event) => {
+    event.preventDefault()
+    document.querySelectorAll(".filter-button").forEach((otherBtn) => {
+      if (otherBtn !== btn) {
+        otherBtn.classList.remove("active"); // Remove active state on other buttons
+      }
+    });
 
+    btn.classList.toggle("active"); // Exchange active state on clicked button
+  });
+});
+
+//Filter recipes on diets Vegetarian
+filterVeggi.addEventListener("click", () => {
+  console.log("Vegetarian filter button was clicked")
+  
   const vegetarianRecipes = fetchedRecipes.filter(recipe => recipe.vegetarian);
 
   if (vegetarianRecipes.length > 0){
     recipeAPI.innerHTML = ""; // Clear previous content
-
+    // Convert array to a string of list items ingredients
     vegetarianRecipes.forEach((recipe) => {
       const ingredientsList = recipe.extendedIngredients
         .map((ingredient) => `<li>${ingredient.original}</li>`)
         .join("");
-
-
     // Clear and display only the vegetarian recipe
     recipeAPI.innerHTML += `
     <div class="recipe-card-img-content-common">
@@ -296,18 +313,36 @@ filterVeggi.addEventListener("click", (event) => {
   }
   })
 
+  //Sort
+
+  document.querySelectorAll(".sort-button").forEach((btn) => {
+    btn.addEventListener("change", () => {
+      document.querySelectorAll(".sort-button").forEach((otherBtn) => {
+        if (otherBtn !== btn) {
+          otherBtn.classList.remove("active"); // Tar bort aktiv status från andra knappar
+        }
+      });
+  
+      btn.classList.toggle("active"); // Växlar aktiv status på klickad knapp
+    });
+  });
 
 
+//const sortRecipes = (fetchedRecipes) => {
+  
 
+    // Remove class from all buttons first (so only one is active)
+    //sortButton.forEach((btn) => btn.classList.remove(".sort-buttons-select"));
 
-     
-
-
-
+    // Add class only to the selected radio button
+    //event.target.classList.add("sort-buttons-select");
  
 
-//filterVegan.addEventListener("click", filterRecipesDiets)
-//filterVeggi.addEventListener("click", filterRecipesDiets)
+  
+
+
+
+
 
 
 
@@ -359,19 +394,19 @@ fetchData();
 
 
 //Make the ALL button work, don´t forget to create a const filterAll!
-// filterAll.addEventListener("click", (event) => {
-//    event.preventDefault()
-//    console.log("ALL filter button was clicked")
-//    event.target.classList.toggle("filter-button-select") 
-//    loadRecipes(recipes)      
-// })
+ filterAll.addEventListener("click", (event) => {
+    event.preventDefault()
+    console.log("ALL filter button was clicked")
+    event.target.classList.toggle("filter-button-select") 
+    loadRecipes(recipes)      
+ })
 
-// filterVegan.addEventListener("click", (event) => {
-//     event.preventDefault()
-//     console.log("Vegan filter button was clicked")
-//     event.target.classList.toggle("filter-button-select") 
-//     filterRecipe("vegan")    
-// })
+ filterVegan.addEventListener("click", (event) => {
+     event.preventDefault()
+     console.log("Vegan filter button was clicked")
+     event.target.classList.toggle("filter-button-select") 
+     filterRecipe("vegan")    
+ })
 
 // filterVeggi.addEventListener("click", (event) => {
 //   event.preventDefault()

@@ -71,10 +71,15 @@ input{
   display: none; 
 }
 
-.filter-button-select{  
+/* .filter-button-select{  
   background: #0018A4;
   color:  #FFF;
-} 
+}  */
+
+.filter-button.active {
+  background: #0018a4;
+  color:  #FFF;
+}
 
 .sort-h3{
   grid-column: 1 / 2;
@@ -96,11 +101,15 @@ input{
   padding: 1px 6px;
 }
 
-.sort-buttons-select{
+/* .sort-buttons-select{
   background: #FF6589;
   color: #FFF;
-}
+} */
 
+.sort-btn.active {
+  background: #ff6589;
+  color: white;
+}
 
 /* Section */
 #recipe-cards-API{  
