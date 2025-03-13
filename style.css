@@ -106,7 +106,7 @@ input{
   color: #FFF;
 } */
 
-.sort-btn.active {
+.sort-button.active {
   background: #ff6589;
   color: white;
 }

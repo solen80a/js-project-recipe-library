@@ -164,7 +164,7 @@
 
 
 const recipeCards = document.getElementById("recipe-card")
-const filterButton = document.querySelectorAll (".filter-button")
+const filterButton = document.querySelector (".filter-button")
 const filterVegan = document.querySelector ("#filter-button-vegan")
 const filterVeggi = document.querySelector ("#filter-button-vegetarian")
 const filterGluten = document.querySelector ("#filter-button-gluten-free")
@@ -280,38 +280,90 @@ document.querySelectorAll(".filter-button").forEach((btn) => {
 });
 
 //Filter recipes on diets Vegetarian
-filterVeggi.addEventListener("click", () => {
-  console.log("Vegetarian filter button was clicked")
+// filterVeggi.addEventListener("click", () => {
+//   console.log("Vegetarian filter button was clicked")
   
-  const vegetarianRecipes = fetchedRecipes.filter(recipe => recipe.vegetarian);
+//   const vegetarianRecipes = fetchedRecipes.filter(recipe => recipe.vegetarian);
 
-  if (vegetarianRecipes.length > 0){
-    recipeAPI.innerHTML = ""; // Clear previous content
-    // Convert array to a string of list items ingredients
-    vegetarianRecipes.forEach((recipe) => {
-      const ingredientsList = recipe.extendedIngredients
-        .map((ingredient) => `<li>${ingredient.original}</li>`)
-        .join("");
-    // Clear and display only the vegetarian recipe
-    recipeAPI.innerHTML += `
-    <div class="recipe-card-img-content-common">
-      <img src="${recipe.image}" alt="${recipe.title}" class="recipe-card-image"> 
-      <div class="recipe-card-content">                
-        <h2>${recipe.title}</h2> 
-        <div class="recipe-cards-common">        
-          <p><strong>Cuisine:</strong> ${recipe.cuisines.join(", ") || "Unknown"}</p>
-          <p><strong>Time:</strong> ${recipe.readyInMinutes} minutes</p>
-        </div>  
-        <p><strong>Ingredients:</strong></p>
-        <ul class="recipe-card-content">${ingredientsList}</ul>  
-      </div>
-    </div>`;
-    })
-  } else {
-    console.warn("No vegetarian recipes available! Fetching new recipes...");
-    fetchData(); // Fetch recipes if none are available
-  }
-  })
+//   if (vegetarianRecipes.length > 0){
+//     recipeAPI.innerHTML = ""; // Clear previous content
+//     // Convert array to a string of list items ingredients
+//     vegetarianRecipes.forEach((recipe) => {
+//       const ingredientsList = recipe.extendedIngredients
+//         .map((ingredient) => `<li>${ingredient.original}</li>`)
+//         .join("");
+//     // Clear and display only the vegetarian recipe
+//     recipeAPI.innerHTML += `
+//     <div class="recipe-card-img-content-common">
+//       <img src="${recipe.image}" alt="${recipe.title}" class="recipe-card-image"> 
+//       <div class="recipe-card-content">                
+//         <h2>${recipe.title}</h2> 
+//         <div class="recipe-cards-common">        
+//           <p><strong>Cuisine:</strong> ${recipe.cuisines.join(", ") || "Unknown"}</p>
+//           <p><strong>Time:</strong> ${recipe.readyInMinutes} minutes</p>
+//         </div>  
+//         <p><strong>Ingredients:</strong></p>
+//         <ul class="recipe-card-content">${ingredientsList}</ul>  
+//       </div>
+//     </div>`;
+//     })
+//   } else {
+//     console.warn("No vegetarian recipes available! Fetching new recipes...");
+//     fetchData(); // Fetch recipes if none are available
+//   }
+//   })
+
+    // Function to display recipes
+    const displayRecipes = (recipes) => {
+        recipeAPI.innerHTML = ""; // Clear previous content
+        recipes.forEach((recipe) => {
+            const ingredientsList = recipe.extendedIngredients
+                .map((ingredient) => `<li>${ingredient.original}</li>`)
+                .join("");
+
+            recipeAPI.innerHTML += `
+            <div class="recipe-card-img-content-common">
+                <img src="${recipe.image}" alt="${recipe.title}" class="recipe-card-image"> 
+                <div class="recipe-card-content">                
+                    <h2>${recipe.title}</h2> 
+                    <div class="recipe-cards-common">        
+                        <p><strong>Cuisine:</strong> ${recipe.cuisines.join(", ") || "Unknown"}</p>
+                        <p><strong>Time:</strong> ${recipe.readyInMinutes} minutes</p>
+                    </div>  
+                    <p><strong>Ingredients:</strong></p>
+                    <ul class="recipe-card-content">${ingredientsList}</ul>  
+                </div>
+            </div>`;
+        });
+    };
+
+
+    // Event Listeners for Filtering
+    filterAll.addEventListener("click", () => {
+      const allRecipes = fetchedRecipes.filter(recipe => recipe.vegan);
+      displayRecipes(fetchedRecipes);
+    });
+
+    filterVegan.addEventListener("click", () => {
+      const veganRecipes = fetchedRecipes.filter(recipe => recipe.vegan);
+      displayRecipes(veganRecipes);
+    });
+    
+    filterVeggi.addEventListener("click", () => {
+      const vegRecipes = fetchedRecipes.filter(recipe => recipe.vegetarian);
+      displayRecipes(vegRecipes);
+    });
+    
+    filterGluten.addEventListener("click", () => {
+      const glutenFreeRecipes = fetchedRecipes.filter(recipe => recipe.glutenFree);
+      displayRecipes(glutenFreeRecipes);
+    });
+    
+    filterDairy.addEventListener("click", () => {
+      const dairyFreeRecipes = fetchedRecipes.filter(recipe => recipe.dairyFree);
+      displayRecipes(dairyFreeRecipes);
+    });
+
 
   //Sort
   document.querySelectorAll(".sort-button").forEach((btn) => {
@@ -396,19 +448,19 @@ fetchData();
 
 
 //Make the ALL button work, don´t forget to create a const filterAll!
- filterAll.addEventListener("click", (event) => {
-    event.preventDefault()
-    console.log("ALL filter button was clicked")
-    event.target.classList.toggle("filter-button-select") 
-    loadRecipes(recipes)      
- })
+//  filterAll.addEventListener("click", (event) => {
+//     event.preventDefault()
+//     console.log("ALL filter button was clicked")
+//     event.target.classList.toggle("filter-button-select") 
+//     loadRecipes(recipes)      
+//  })
 
- filterVegan.addEventListener("click", (event) => {
-     event.preventDefault()
-     console.log("Vegan filter button was clicked")
-     event.target.classList.toggle("filter-button-select") 
-     filterRecipe("vegan")    
- })
+//  filterVegan.addEventListener("click", (event) => {
+//      event.preventDefault()
+//      console.log("Vegan filter button was clicked")
+//      event.target.classList.toggle("filter-button-select") 
+//      filterRecipe("vegan")    
+//  })
 
 // filterVeggi.addEventListener("click", (event) => {
 //   event.preventDefault()
@@ -417,25 +469,25 @@ fetchData();
 //   filterRecipe("vegetarian")    
 // })
 
-filterGluten.addEventListener("click", (event) => {
-  event.preventDefault()
-  console.log("Gluten-free filter button was clicked")
-  event.target.classList.toggle("filter-button-select") 
-  filterRecipe("gluten-free")    
-})
+// filterGluten.addEventListener("click", (event) => {
+//   event.preventDefault()
+//   console.log("Gluten-free filter button was clicked")
+//   event.target.classList.toggle("filter-button-select") 
+//   filterRecipe("gluten-free")    
+// })
 
-filterDairy.addEventListener("click", (event) => {
-  event.preventDefault()
-  console.log("Dairy-free filter button was clicked")
-  event.target.classList.toggle("filter-button-select") 
-  filterRecipe("dairy-free")    
-})
+// filterDairy.addEventListener("click", (event) => {
+//   event.preventDefault()
+//   console.log("Dairy-free filter button was clicked")
+//   event.target.classList.toggle("filter-button-select") 
+//   filterRecipe("dairy-free")    
+// })
 
-filterDead.addEventListener("click", (event) => {
-  event.preventDefault()
-  console.log("This is a dead end")
-  filterRecipe("dead")
-})
+// filterDead.addEventListener("click", (event) => {
+//   event.preventDefault()
+//   console.log("This is a dead end")
+//   filterRecipe("dead")
+// })
 
 //loadRecipes(recipes)
 
