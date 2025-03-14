@@ -15,8 +15,7 @@ h1{
 main{
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;  
-  /* align-items: center; */
+  flex-wrap: wrap;    
   padding: 8px 16px; 
   gap: 10px; 
 }
@@ -72,11 +71,6 @@ input{
   display: none; 
 }
 
-/* .filter-button-select{  
-  background: #0018A4;
-  color:  #FFF;
-}  */
-
 .filter-button.active {
   background: #0018a4;
   color:  #FFF;
@@ -107,28 +101,11 @@ input{
   color: white;
 }
 
-/* .sort-buttons-select{
-  background: #FF6589;
-  color: #FFF;
-} */
-
-/* .sort-button {
-  cursor: pointer;
-}  */
-
 /* Section */
 #recipe-cards-API{  
   display: grid;  
   grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 23%, 340px), 1fr));
-  gap: .3em;
-  /* max-width: 268px; */
-  
-}
-
-/* Article */
-#recipe-card-API{  
-
-  
+  gap: .3em;  
 }
 
  .display-no-result:active{
@@ -157,11 +134,6 @@ input{
 
 
 
-/* #recipe-card{  
-  display: grid;  
-  grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 23%, 340px), 1fr));
-  gap: .3em;
-} */
 
 .recipe-card-img-content-common{ 
   border: 2px solid #0018A4;
