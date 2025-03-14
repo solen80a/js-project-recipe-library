@@ -6,14 +6,12 @@ const filterVeggi = document.querySelector ("#filter-button-vegetarian")
 const filterGluten = document.querySelector ("#filter-button-gluten-free")
 const filterDairy = document.querySelector ("#filter-button-dairy-free")
 const filterAll = document.querySelector ("#filter-button-all")
-const filterDead = document.querySelector ("#filter-button-dead")
+const displayNoResultsMessage = document.querySelector (".display-no-result")
 const randomRecipe = document.querySelector("#random-button")
 const sortAscending = document.querySelector ("#sort-button-ascending")
 const sortDescending = document.querySelector ("#sort-button-descending")
+const errorContainer = document.querySelector(".error-container")
 
-//const URL = "https://api.spoonacular.com/recipes/random?number=1&apiKey=9d61b3a0389f408487f429835c7333f9"
-
-//console.log(URL)
 
 const recipeAPI = document.getElementById("recipe-cards-API")
 let fetchedRecipes = []
@@ -22,14 +20,19 @@ let recipecontent = []
  //Fetches recipes from the API
 const fetchData = async () => {
   try{
-    const response = await fetch("https://api.spoonacular.com/recipes/random?number=10&apiKey=9d61b3a0389f408487f429835c7333f9");
+    const response = await fetch("https://api.spoonacular.com/recipes/random?number=50&apiKey=9d61b3a0389f408487f429835c7333f9");
+
+    if (response.status === 402){
+      console.warn("Sorry your daily quota limit was reached!", error);      
+      alert("Sorry your daily quota limit was reached!");
+    } else if (!response.ok) {
+      throw new Error(`Status ${response.status}`)
+    } 
+
     const data = await response.json();
-    console.log("what is the data now?", data); 
-
+    
     fetchedRecipes = data.recipes; // Store recipes globally
-    console.log("Fetched recipes:", fetchedRecipes);
-
-   
+    //console.log("Fetched recipes:", fetchedRecipes);   
    
     recipeAPI.innerHTML = "" //resets the container before we load recipes   
 
@@ -48,8 +51,9 @@ const fetchData = async () => {
         class="recipe-card-image"> 
         <div class="recipe-card-content">                
           <h2>${recipe.title}</h2> 
-          <div class="recipe-cards-common">        
-            <p><strong>Cuisine:</strong> ${recipe.cuisines}</p>
+          <div class="recipe-cards-common">
+            <p><strong>Cuisine:</strong> ${recipe.cuisines.join(", ") || "Unknown"}</p>
+            <p><strong>Diets:</strong> ${recipe.diets.join(", ") || "Unknown"}</p>
             <p><strong>Time:</strong> ${recipe.readyInMinutes} minutes</p>
           </div>  
           <p><strong>Ingredients:</strong></p>
@@ -59,18 +63,18 @@ const fetchData = async () => {
           </div>
       </div>
           `
-        });  
+        }); 
+    
         
   } catch (error) {
-          console.error("Error fetching data:", error);
-  }
- 
+    alert("Oh no, something went wrong!\nThere was an error, please try again later \n" + error)    
+    console.error("Error fetching data:", error);
+  } 
 } 
 
 
 //Get one random recipe
- randomRecipe.addEventListener("click", () => {
-   console.log("random button clicked", fetchedRecipes)
+ randomRecipe.addEventListener("click", () => {   
 
    if (fetchedRecipes.length > 0) {
     const randomIndex = Math.floor(Math.random() * fetchedRecipes.length);
@@ -86,8 +90,9 @@ const fetchData = async () => {
       <img src="${selectedRecipe.image}" alt="${selectedRecipe.title}" class="recipe-card-image"> 
       <div class="recipe-card-content">                
         <h2>${selectedRecipe.title}</h2> 
-        <div class="recipe-cards-common">        
-          <p><strong>Cuisine:</strong> ${selectedRecipe.cuisines.join(", ") || "Unknown"}</p>
+        <div class="recipe-cards-common">  
+          <p><strong>Cuisine:</strong> ${selectedRecipe.cuisines.join(", ") || "Unknown"}</p>      
+          <p><strong>Diets:</strong> ${selectedRecipe.diets.join(", ") || "Unknown"}</p>
           <p><strong>Time:</strong> ${selectedRecipe.readyInMinutes} minutes</p>
         </div>  
         <p><strong>Ingredients:</strong></p>
@@ -129,6 +134,7 @@ const displayRecipes = (recipes) => {
                 <h2>${recipe.title}</h2> 
                 <div class="recipe-cards-common">        
                     <p><strong>Cuisine:</strong> ${recipe.cuisines.join(", ") || "Unknown"}</p>
+                    <p><strong>Diets:</strong> ${recipe.diets.join(", ") || "Unknown"}</p>
                     <p><strong>Time:</strong> ${recipe.readyInMinutes} minutes</p>
                 </div>  
                 <p><strong>Ingredients:</strong></p>
@@ -147,47 +153,50 @@ const displayRecipes = (recipes) => {
 
     filterVegan.addEventListener("click", () => {
       const veganRecipes = fetchedRecipes.filter(recipe => recipe.vegan);
-      displayRecipes(veganRecipes);
+      if (veganRecipes.length === 0){
+        displayNoResultsMessage.innerHTML ="Sorry, there are no vegan recipes";
+      } else {
+        displayRecipes(veganRecipes);
+      }      
     });
     
     filterVeggi.addEventListener("click", () => {
       const vegRecipes = fetchedRecipes.filter(recipe => recipe.vegetarian);
-      displayRecipes(vegRecipes);
+      if (vegRecipes.length === 0){
+        displayNoResultsMessage.innerHTML ="Sorry,there are no vegetarian recipes"
+      } else {
+        displayRecipes(vegRecipes);
+      }      
     });
     
     filterGluten.addEventListener("click", () => {
       const glutenFreeRecipes = fetchedRecipes.filter(recipe => recipe.glutenFree);
+      if (glutenFreeRecipes.length === 0){
+        displayNoResultsMessage.innerHTML ="Sorry,there are no gluten free recipes"
+      } else {
+        displayRecipes(glutenFreeRecipes);
+      }
       displayRecipes(glutenFreeRecipes);
     });
     
     filterDairy.addEventListener("click", () => {
       const dairyFreeRecipes = fetchedRecipes.filter(recipe => recipe.dairyFree);
-      displayRecipes(dairyFreeRecipes);
+      if (dairyFreeRecipes.length === 0) {
+        // Handle case where no recipes match
+        displayNoResultsMessage.innerHTML ="Sorry,there are no dairy free recipes";
+      } else {
+        displayRecipes(dairyFreeRecipes);
+      }
     });
 
-
-  //Sort
-  document.querySelectorAll(".sort-button").forEach((btn) => {
-    btn.addEventListener("change", () => {
-      document.querySelectorAll(".sort-button").forEach((otherBtn) => {
-        if (otherBtn !== btn) {
-          otherBtn.classList.remove("active"); // Tar bort aktiv status från andra knappar
-        }
-      });
-  
-      btn.classList.toggle("active"); // Växlar aktiv status på klickad knapp
-    });
-  });
 
   //Event listeners for sorting
   sortAscending.addEventListener("change", () => {
-    fetchedRecipes.sort((a, b) => a.spoonacularScore - b.spoonacularScore); 
-    console.log("Sorting in ascending order (citroner)"); 
+    fetchedRecipes.sort((a, b) => a.spoonacularScore - b.spoonacularScore);    
     displayRecipes(fetchedRecipes)  
   });
   sortDescending.addEventListener("change", () => {
-    fetchedRecipes.sort((a, b) => b.spoonacularScore - a.spoonacularScore); 
-    console.log("Sorting in descending order (apelsiner)");  
+    fetchedRecipes.sort((a, b) => b.spoonacularScore - a.spoonacularScore);       
     displayRecipes(fetchedRecipes) 
   });
 

@@ -16,6 +16,7 @@ main{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;  
+  /* align-items: center; */
   padding: 8px 16px; 
   gap: 10px; 
 }
@@ -98,7 +99,12 @@ input{
   text-align: center;
   font-size: 18px;
   border: none;  
-  padding: 1px 6px;
+  padding: 1px 6px;  
+}
+
+.sort-buttons:has(input.sort-button:checked) {
+  background: #ff6589;
+  color: white;
 }
 
 /* .sort-buttons-select{
@@ -106,10 +112,9 @@ input{
   color: #FFF;
 } */
 
-.sort-button.active {
-  background: #ff6589;
-  color: white;
-}
+/* .sort-button {
+  cursor: pointer;
+}  */
 
 /* Section */
 #recipe-cards-API{  
@@ -117,15 +122,40 @@ input{
   grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 23%, 340px), 1fr));
   gap: .3em;
   /* max-width: 268px; */
+  
 }
 
 /* Article */
 #recipe-card-API{  
-  /* display: grid;  
-  grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 23%, 340px), 1fr));
-  gap: .3em; */
+
   
 }
+
+ .display-no-result:active{
+  color:#FFF;
+  border: 2px solid #0018A4;
+  box-shadow: 0px 0px 30px 0px rgba(0, 24, 164, 0.20);
+  background: #ff6589;
+  box-shadow: 0px 0px 30px 0px rgba(0, 24, 164, 0.20);
+  border-radius: 16px;
+  padding: 16px 16px 24px 16px;  
+  max-width: 340px; 
+  align-self: center; 
+}
+
+.error-container:active{
+  color:#FFF;
+  border: 2px solid #0018A4;
+  box-shadow: 0px 0px 30px 0px rgba(0, 24, 164, 0.20);
+  background: #ff6589;
+  box-shadow: 0px 0px 30px 0px rgba(0, 24, 164, 0.20);
+  border-radius: 16px;
+  padding: 16px 16px 24px 16px;  
+  max-width: 340px; 
+  align-self: center; 
+  } 
+
+
 
 /* #recipe-card{  
   display: grid;  
@@ -196,7 +226,7 @@ input{
     grid-template-rows: repeat(3, 1fr);
   }
  
-  .filter-button:hover{
+  .filter-buttons:hover{
     border: 2px solid #0018A4;  
   }
 
@@ -217,16 +247,11 @@ input{
     color: #FFF;  
   }
 
-  .recipe-card-API{
+  .recipe-card-img-content-common{ 
     border: none;
-    box-shadow: none;
-    border: 1px solid #E9E9E9;
   }
 
-  .recipe-card-API:hover{
+  .recipe-card-img-content-common:hover{ 
     border: 2px solid #0018A4;
-    background: #FFF;
-    box-shadow: 0px 0px 30px 0px rgba(0, 24, 164, 0.20);
-    border-radius: 16px;
   }
 }
