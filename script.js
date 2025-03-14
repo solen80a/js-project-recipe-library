@@ -23,8 +23,9 @@ const fetchData = async () => {
     const response = await fetch("https://api.spoonacular.com/recipes/random?number=50&apiKey=9d61b3a0389f408487f429835c7333f9");
 
     if (response.status === 402){
-      console.warn("Sorry your daily quota limit was reached!", error);      
+      console.warn("Sorry your daily quota limit was reached!");      
       alert("Sorry your daily quota limit was reached!");
+      return;
     } else if (!response.ok) {
       throw new Error(`Status ${response.status}`)
     } 
