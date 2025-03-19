@@ -20,29 +20,27 @@ let recipecontent = []
  //Fetches recipes from the API
 const fetchData = async () => {
   try{
-    const response = await fetch("https://api.spoonacular.com/recipes/random?number=50&apiKey=9d61b3a0389f408487f429835c7333f9");
+    const response = await fetch("https://api.spoonacular.com/recipes/random?number=50&apiKey=9d61b3a0389f408487f429835c7333f9")
 
     if (response.status === 402){
-      console.warn("Sorry your daily quota limit was reached!");      
-      alert("Sorry your daily quota limit was reached!");
-      return;
+      console.warn("Sorry your daily quota limit was reached!")     
+      alert("Sorry your daily quota limit was reached!")
+      return
     } else if (!response.ok) {
       throw new Error(`Status ${response.status}`)
     } 
 
-    const data = await response.json();
+    const data = await response.json()
     
-    fetchedRecipes = data.recipes; // Store recipes globally
-    //console.log("Fetched recipes:", fetchedRecipes);   
+    fetchedRecipes = data.recipes // Store recipes globally   
    
-    recipeAPI.innerHTML = "" //resets the container before we load recipes   
-
+    recipeAPI.innerHTML = "" //resets the container before we load recipes  
    
     data.recipes.forEach((recipe) => {  
       // Convert array to a string of list items ingredients
       const ingredientsList = recipe.extendedIngredients
         .map((ingredient) => `<li>${ingredient.original}</li>`)
-        .join("");   
+        .join("")  
       //Display the recipe in the card      
       recipeAPI.innerHTML += `
       <div class="recipe-card-img-content-common">
@@ -64,12 +62,12 @@ const fetchData = async () => {
           </div>
       </div>
           `
-        }); 
+        })
     
         
   } catch (error) {
     alert("Oh no, something went wrong!\nThere was an error, please try again later \n" + error)    
-    console.error("Error fetching data:", error);
+    console.error("Error fetching data:", error)
   } 
 } 
 
@@ -78,13 +76,13 @@ const fetchData = async () => {
  randomRecipe.addEventListener("click", () => {   
 
    if (fetchedRecipes.length > 0) {
-    const randomIndex = Math.floor(Math.random() * fetchedRecipes.length);
-    const selectedRecipe = fetchedRecipes[randomIndex];
+    const randomIndex = Math.floor(Math.random() * fetchedRecipes.length)
+    const selectedRecipe = fetchedRecipes[randomIndex]
 
     // Convert array to a string of list items ingredients
     const ingredientsList = selectedRecipe.extendedIngredients
       .map((ingredient) => `<li>${ingredient.original}</li>`)
-      .join("");
+      .join("")
     // Clear and display only the random recipe
     recipeAPI.innerHTML = `
     <div class="recipe-card-img-content-common">
@@ -99,10 +97,10 @@ const fetchData = async () => {
         <p><strong>Ingredients:</strong></p>
         <ul class="recipe-card-content">${ingredientsList}</ul>  
       </div>
-    </div>`;
+    </div>`
   } else {
-    console.warn("No recipes available! Fetching new recipes...");
-    fetchData(); // Fetch recipes if none are available
+    console.warn("No recipes available! Fetching new recipes...")
+    fetchData() // Fetch recipes if none are available
   }
 })
 
@@ -112,21 +110,21 @@ document.querySelectorAll(".filter-button").forEach((btn) => {
     event.preventDefault()
     document.querySelectorAll(".filter-button").forEach((otherBtn) => {
       if (otherBtn !== btn) {
-        otherBtn.classList.remove("active"); // Remove active state on other buttons
+        otherBtn.classList.remove("active") // Remove active state on other buttons
       }
-    });
+    })
 
-    btn.classList.toggle("active"); // Exchange active state on clicked button
-  });
-});
+    btn.classList.toggle("active") // Exchange active state on clicked button
+  })
+})
 
   // Function to display recipes
 const displayRecipes = (recipes) => {
-    recipeAPI.innerHTML = ""; // Clear previous content
+    recipeAPI.innerHTML = "" // Clear previous content
     recipes.forEach((recipe) => {
         const ingredientsList = recipe.extendedIngredients
             .map((ingredient) => `<li>${ingredient.original}</li>`)
-            .join("");
+            .join("")
 
         recipeAPI.innerHTML += `
         <div class="recipe-card-img-content-common">
@@ -141,65 +139,64 @@ const displayRecipes = (recipes) => {
                 <p><strong>Ingredients:</strong></p>
                 <ul class="recipe-card-content">${ingredientsList}</ul>  
             </div>
-        </div>`;
-    });
-};
+        </div>`
+    })
+}
 
 
     // Event Listeners for Filtering
     filterAll.addEventListener("click", () => {
-      const allRecipes = fetchedRecipes.filter(recipe => recipe.vegan);
-      displayRecipes(fetchedRecipes);
-    });
+      const allRecipes = fetchedRecipes.filter(recipe => recipe)
+      displayRecipes(fetchedRecipes)
+    })
 
     filterVegan.addEventListener("click", () => {
-      const veganRecipes = fetchedRecipes.filter(recipe => recipe.vegan);
+      const veganRecipes = fetchedRecipes.filter(recipe => recipe.vegan)
       if (veganRecipes.length === 0){
-        displayNoResultsMessage.innerHTML ="Sorry, there are no vegan recipes";
+        displayNoResultsMessage.innerHTML ="Sorry, there are no vegan recipes"
       } else {
-        displayRecipes(veganRecipes);
+        displayRecipes(veganRecipes)
       }      
-    });
+    })
     
     filterVeggi.addEventListener("click", () => {
-      const vegRecipes = fetchedRecipes.filter(recipe => recipe.vegetarian);
+      const vegRecipes = fetchedRecipes.filter(recipe => recipe.vegetarian)
       if (vegRecipes.length === 0){
         displayNoResultsMessage.innerHTML ="Sorry,there are no vegetarian recipes"
       } else {
-        displayRecipes(vegRecipes);
+        displayRecipes(vegRecipes)
       }      
-    });
+    })
     
     filterGluten.addEventListener("click", () => {
-      const glutenFreeRecipes = fetchedRecipes.filter(recipe => recipe.glutenFree);
+      const glutenFreeRecipes = fetchedRecipes.filter(recipe => recipe.glutenFree)
       if (glutenFreeRecipes.length === 0){
         displayNoResultsMessage.innerHTML ="Sorry,there are no gluten free recipes"
       } else {
-        displayRecipes(glutenFreeRecipes);
+        displayRecipes(glutenFreeRecipes)
       }
-      displayRecipes(glutenFreeRecipes);
-    });
+    })
     
     filterDairy.addEventListener("click", () => {
-      const dairyFreeRecipes = fetchedRecipes.filter(recipe => recipe.dairyFree);
+      const dairyFreeRecipes = fetchedRecipes.filter(recipe => recipe.dairyFree)
       if (dairyFreeRecipes.length === 0) {
         // Handle case where no recipes match
-        displayNoResultsMessage.innerHTML ="Sorry,there are no dairy free recipes";
+        displayNoResultsMessage.innerHTML ="Sorry,there are no dairy free recipes"
       } else {
-        displayRecipes(dairyFreeRecipes);
+        displayRecipes(dairyFreeRecipes)
       }
-    });
+    })
 
 
   //Event listeners for sorting
   sortAscending.addEventListener("change", () => {
-    fetchedRecipes.sort((a, b) => a.spoonacularScore - b.spoonacularScore);    
+    fetchedRecipes.sort((a, b) => a.spoonacularScore - b.spoonacularScore) 
     displayRecipes(fetchedRecipes)  
-  });
+  })
   sortDescending.addEventListener("change", () => {
-    fetchedRecipes.sort((a, b) => b.spoonacularScore - a.spoonacularScore);       
+    fetchedRecipes.sort((a, b) => b.spoonacularScore - a.spoonacularScore)      
     displayRecipes(fetchedRecipes) 
-  });
+  })
 
 
-fetchData();
+fetchData()
