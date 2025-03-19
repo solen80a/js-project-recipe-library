@@ -1,4 +1,4 @@
-
+//DOM selectors
 const recipeCards = document.getElementById("recipe-card")
 const filterButton = document.querySelector (".filter-button")
 const filterVegan = document.querySelector ("#filter-button-vegan")
@@ -11,13 +11,12 @@ const randomRecipe = document.querySelector("#random-button")
 const sortAscending = document.querySelector ("#sort-button-ascending")
 const sortDescending = document.querySelector ("#sort-button-descending")
 const errorContainer = document.querySelector(".error-container")
-
-
 const recipeAPI = document.getElementById("recipe-cards-API")
+
 let fetchedRecipes = []
 let recipecontent = []
 
- //Fetches recipes from the API
+//Fetches recipes from the API
 const fetchData = async () => {
   try{
     const response = await fetch("https://api.spoonacular.com/recipes/random?number=50&apiKey=9d61b3a0389f408487f429835c7333f9")
@@ -32,7 +31,7 @@ const fetchData = async () => {
 
     const data = await response.json()
     
-    fetchedRecipes = data.recipes // Store recipes globally   
+    fetchedRecipes = data.recipes //Store recipes globally   
    
     recipeAPI.innerHTML = "" //resets the container before we load recipes  
    
@@ -104,21 +103,7 @@ const fetchData = async () => {
   }
 })
 
-//Filter
-document.querySelectorAll(".filter-button").forEach((btn) => {
-  btn.addEventListener("click", (event) => {
-    event.preventDefault()
-    document.querySelectorAll(".filter-button").forEach((otherBtn) => {
-      if (otherBtn !== btn) {
-        otherBtn.classList.remove("active") // Remove active state on other buttons
-      }
-    })
-
-    btn.classList.toggle("active") // Exchange active state on clicked button
-  })
-})
-
-  // Function to display recipes
+// Function to display recipes
 const displayRecipes = (recipes) => {
     recipeAPI.innerHTML = "" // Clear previous content
     recipes.forEach((recipe) => {
@@ -143,60 +128,75 @@ const displayRecipes = (recipes) => {
     })
 }
 
-
-    // Event Listeners for Filtering
-    filterAll.addEventListener("click", () => {
-      const allRecipes = fetchedRecipes.filter(recipe => recipe)
-      displayRecipes(fetchedRecipes)
-    })
-
-    filterVegan.addEventListener("click", () => {
-      const veganRecipes = fetchedRecipes.filter(recipe => recipe.vegan)
-      if (veganRecipes.length === 0){
-        displayNoResultsMessage.innerHTML ="Sorry, there are no vegan recipes"
-      } else {
-        displayRecipes(veganRecipes)
-      }      
-    })
-    
-    filterVeggi.addEventListener("click", () => {
-      const vegRecipes = fetchedRecipes.filter(recipe => recipe.vegetarian)
-      if (vegRecipes.length === 0){
-        displayNoResultsMessage.innerHTML ="Sorry,there are no vegetarian recipes"
-      } else {
-        displayRecipes(vegRecipes)
-      }      
-    })
-    
-    filterGluten.addEventListener("click", () => {
-      const glutenFreeRecipes = fetchedRecipes.filter(recipe => recipe.glutenFree)
-      if (glutenFreeRecipes.length === 0){
-        displayNoResultsMessage.innerHTML ="Sorry,there are no gluten free recipes"
-      } else {
-        displayRecipes(glutenFreeRecipes)
-      }
-    })
-    
-    filterDairy.addEventListener("click", () => {
-      const dairyFreeRecipes = fetchedRecipes.filter(recipe => recipe.dairyFree)
-      if (dairyFreeRecipes.length === 0) {
-        // Handle case where no recipes match
-        displayNoResultsMessage.innerHTML ="Sorry,there are no dairy free recipes"
-      } else {
-        displayRecipes(dairyFreeRecipes)
+//Filter click event listener
+document.querySelectorAll(".filter-button").forEach((btn) => {
+  btn.addEventListener("click", (event) => {
+    event.preventDefault()
+    document.querySelectorAll(".filter-button").forEach((otherBtn) => {
+      if (otherBtn !== btn) {
+        otherBtn.classList.remove("active") // Remove active state on other buttons
       }
     })
 
+    btn.classList.toggle("active") // Exchange active state on clicked button
+  })
+})
 
-  //Event listeners for sorting
-  sortAscending.addEventListener("change", () => {
-    fetchedRecipes.sort((a, b) => a.spoonacularScore - b.spoonacularScore) 
-    displayRecipes(fetchedRecipes)  
-  })
-  sortDescending.addEventListener("change", () => {
-    fetchedRecipes.sort((a, b) => b.spoonacularScore - a.spoonacularScore)      
-    displayRecipes(fetchedRecipes) 
-  })
+//Event Listeners for Filtering
+filterAll.addEventListener("click", () => {
+  const allRecipes = fetchedRecipes.filter(recipe => recipe)
+  displayRecipes(fetchedRecipes)
+})
+
+filterVegan.addEventListener("click", () => {
+  const veganRecipes = fetchedRecipes.filter(recipe => recipe.vegan)
+  if (veganRecipes.length === 0){
+    // Handle case where no recipes match
+    displayNoResultsMessage.innerHTML ="Sorry, there are no vegan recipes"
+  } else {
+    displayRecipes(veganRecipes)
+  }      
+})
+
+filterVeggi.addEventListener("click", () => {
+  const vegRecipes = fetchedRecipes.filter(recipe => recipe.vegetarian)
+  if (vegRecipes.length === 0){
+    // Handle case where no recipes match
+    displayNoResultsMessage.innerHTML ="Sorry,there are no vegetarian recipes"
+  } else {
+    displayRecipes(vegRecipes)
+  }      
+})
+
+filterGluten.addEventListener("click", () => {
+  const glutenFreeRecipes = fetchedRecipes.filter(recipe => recipe.glutenFree)
+  if (glutenFreeRecipes.length === 0){
+    displayNoResultsMessage.innerHTML ="Sorry,there are no gluten free recipes"
+  } else {
+    displayRecipes(glutenFreeRecipes)
+  }
+})
+
+filterDairy.addEventListener("click", () => {
+  const dairyFreeRecipes = fetchedRecipes.filter(recipe => recipe.dairyFree)
+  if (dairyFreeRecipes.length === 0) {
+    // Handle case where no recipes match
+    displayNoResultsMessage.innerHTML ="Sorry,there are no dairy free recipes"
+  } else {
+    displayRecipes(dairyFreeRecipes)
+  }
+})
+
+
+//Event listeners for sorting
+sortAscending.addEventListener("change", () => {
+  fetchedRecipes.sort((a, b) => a.spoonacularScore - b.spoonacularScore) 
+  displayRecipes(fetchedRecipes)  
+})
+sortDescending.addEventListener("change", () => {
+  fetchedRecipes.sort((a, b) => b.spoonacularScore - a.spoonacularScore)      
+  displayRecipes(fetchedRecipes) 
+})
 
 
 fetchData()
