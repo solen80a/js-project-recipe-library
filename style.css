@@ -101,7 +101,6 @@ input{
   color: white;
 }
 
-/* Section */
 #recipe-cards-API{  
   display: grid;  
   grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 23%, 340px), 1fr));
@@ -132,8 +131,7 @@ input{
   max-width: 268px;
   border-radius: 12px; 
   align-self: stretch; 
-  background: lightgray;
- 
+  background: lightgray; 
 }
 
 .recipe-card h2{ 
@@ -141,8 +139,7 @@ input{
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  border-bottom: 1px solid #E9E9E9;
-  
+  border-bottom: 1px solid #E9E9E9;  
 }
 
 .recipe-card strong{

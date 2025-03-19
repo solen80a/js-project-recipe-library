@@ -6,11 +6,9 @@ const filterVeggi = document.querySelector ("#filter-button-vegetarian")
 const filterGluten = document.querySelector ("#filter-button-gluten-free")
 const filterDairy = document.querySelector ("#filter-button-dairy-free")
 const filterAll = document.querySelector ("#filter-button-all")
-const displayNoResultsMessage = document.querySelector (".display-no-result")
 const randomRecipe = document.querySelector("#random-button")
 const sortAscending = document.querySelector ("#sort-button-ascending")
 const sortDescending = document.querySelector ("#sort-button-descending")
-const errorContainer = document.querySelector(".error-container")
 const recipeAPI = document.getElementById("recipe-cards-API")
 
 let fetchedRecipes = []
@@ -69,7 +67,6 @@ const fetchData = async () => {
     console.error("Error fetching data:", error)
   } 
 } 
-
 
 //Get one random recipe
  randomRecipe.addEventListener("click", () => {   
@@ -187,7 +184,6 @@ filterDairy.addEventListener("click", () => {
   }
 })
 
-
 //Event listeners for sorting
 sortAscending.addEventListener("change", () => {
   fetchedRecipes.sort((a, b) => a.spoonacularScore - b.spoonacularScore) 
@@ -197,6 +193,5 @@ sortDescending.addEventListener("change", () => {
   fetchedRecipes.sort((a, b) => b.spoonacularScore - a.spoonacularScore)      
   displayRecipes(fetchedRecipes) 
 })
-
 
 fetchData()
