@@ -58,6 +58,8 @@ font-size: 22px;
 .filter-section{
   grid-column: 1 / 2;
   grid-row: 3 / 4;
+  /* display: flex;
+  flex-wrap: wrap; */
 }
 
 .filter-button{  
@@ -66,7 +68,7 @@ font-size: 22px;
   color: #0018A4;
   text-align: center;
   font-size: 18px;
-  border: transparent;
+  border: 2px solid transparent;
   font-family: inherit; 
   margin: 2px 0px 2px 0px;
   padding: 10px;
@@ -89,7 +91,11 @@ input{
 
 .sort-section{
   grid-column: 1 / 2;
-  grid-row: 5 / 6;
+  grid-row: 5 / 6;  
+  margin: 3px 0px 3px 0px;
+  padding: 10px;
+  /* display: flex;  
+  flex-wrap: wrap; */
 }
 
 .sort-buttons{  
@@ -98,15 +104,21 @@ input{
   color: #0018A4;
   text-align: center;
   font-size: 18px;
-  border: none;     
-  margin: 2px 0px 2px 0px;
+  border: 2px solid transparent;   
   padding: 10px;
-  /* width: 40%;  */
+  width: 40%;
+  display: inline-block;
 }
 
 .sort-buttons:has(input.sort-button:checked) {
   background: #ff6589;
   color: white;
+}
+
+.sort-button{
+  /* display: none; */
+  /* margin: 200px 0px 2px 0px;
+  padding: 100px; */
 }
 
 #recipe-cards-API{  
