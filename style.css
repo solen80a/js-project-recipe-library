@@ -25,14 +25,10 @@ text-align: left;
 font-size: 22px;
 }
 
-.sort-section{
-  gap: 50px;
-}
-
 .filter-sort-section{
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(1, .3fr);
+  grid-template-rows: repeat(5, .3fr);
 }
 
 .random-button{
@@ -58,8 +54,13 @@ font-size: 22px;
 .filter-section{
   grid-column: 1 / 2;
   grid-row: 3 / 4;
-  /* display: flex;
-  flex-wrap: wrap; */
+  gap: 10px;
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: start;
+  align-items: start;  
+  margin: 3px 0px 3px 0px;
+  padding: 2px;
 }
 
 .filter-button{  
@@ -72,7 +73,7 @@ font-size: 22px;
   font-family: inherit; 
   margin: 2px 0px 2px 0px;
   padding: 10px;
-  width: 40%;
+  min-width: 150px;
 }
 
 input{
@@ -93,9 +94,12 @@ input{
   grid-column: 1 / 2;
   grid-row: 5 / 6;  
   margin: 3px 0px 3px 0px;
-  padding: 10px;
-  /* display: flex;  
-  flex-wrap: wrap; */
+  padding: 2px;
+  display: flex;    
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: start;  
+  gap: 10px;  
 }
 
 .sort-buttons{  
@@ -106,7 +110,8 @@ input{
   font-size: 18px;
   border: 2px solid transparent;   
   padding: 10px;
-  width: 40%;
+  margin: 2px 0px 2px 0px;
+  min-width: 150px;
   display: inline-block;
 }
 
@@ -116,9 +121,8 @@ input{
 }
 
 .sort-button{
-  /* display: none; */
-  /* margin: 200px 0px 2px 0px;
-  padding: 100px; */
+  /* margin: 200px; */
+  padding: 100px;
 }
 
 #recipe-cards-API{  
@@ -179,8 +183,8 @@ input{
 /* Desktop Widescreen*/
 @media (min-width: 769px) {
   .filter-sort-section{    
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, .5fr);
+    grid-template-rows: repeat(3, .5fr);
   }
  
   .filter-button:hover{
@@ -209,7 +213,8 @@ input{
   }
 
   .recipe-card-img-content-common{ 
-    border: none;
+    /* border: none; */
+    border: 2px solid transparent; 
   }
 
   .recipe-card-img-content-common:hover{ 
