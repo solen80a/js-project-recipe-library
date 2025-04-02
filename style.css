@@ -127,8 +127,9 @@ input{
 
 #recipe-cards-API{  
   display: grid;  
-  grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 23%, 340px), 1fr));
-  gap: .3em;  
+  grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 25%, 340px), 1fr));
+  gap: .3em; 
+justify-items: center;
 }
 
 .recipe-card-img-content-common{ 
