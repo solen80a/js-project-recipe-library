@@ -115,15 +115,10 @@ input{
   display: inline-block;
 }
 
-.sort-buttons:has(input.sort-button:checked) {
+/* .sort-buttons:has(input.sort-button:checked) {
   background: #ff6589;
   color: white;
-}
-
-.sort-button{
-  /* margin: 200px; */
-  padding: 100px;
-}
+} */
 
 #recipe-cards-API{  
   display: grid;  
@@ -151,11 +146,10 @@ justify-items: center;
   border-bottom: 1px solid #E9E9E9;
 }
 
-.recipe-card-image{
+.recipe-card-image{  
   width: 100%; 
   max-width: 268px;
-  border-radius: 12px; 
-  align-self: stretch; 
+  border-radius: 12px;   
   background: lightgray; 
 }
 
