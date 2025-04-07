@@ -43,8 +43,7 @@ font-size: 22px;
   width: 280px;
   margin: 2px 0px 2px 0px;
   padding: 10px;
-  /* width: 80%; */
-}
+  }
 
 .filter-h3{
   grid-column: 1 / 2;
@@ -115,10 +114,10 @@ input{
   display: inline-block;
 }
 
-/* .sort-buttons:has(input.sort-button:checked) {
+.sort-buttons:has(input.sort-button:checked) {
   background: #ff6589;
   color: white;
-} */
+} 
 
 #recipe-cards-API{  
   display: grid;  
@@ -208,7 +207,6 @@ justify-items: center;
   }
 
   .recipe-card-img-content-common{ 
-    /* border: none; */
     border: 2px solid transparent; 
   }
 

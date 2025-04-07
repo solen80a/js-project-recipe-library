@@ -13,6 +13,8 @@ const recipeAPI = document.getElementById("recipe-cards-API")
 
 let fetchedRecipes = []
 let recipecontent = []
+let currentFilter = null; // e.g., 'vegan', 'vegetarian', etc.
+let currentSort = null;   // 'asc' or 'desc'
 
 //Fetches recipes from the API
 const fetchData = async () => {
@@ -125,111 +127,26 @@ const displayRecipes = (recipes) => {
     })
 }
 
-//Filter click event listener
- document.querySelectorAll(".filter-button").forEach((btn) => {
-   btn.addEventListener("click", (event) => {
-     event.preventDefault()
-     document.querySelectorAll(".filter-button").forEach((otherBtn) => {
-       if (otherBtn !== btn) {
-         otherBtn.classList.remove("active") // Remove active state on other buttons
-       }
-     })
-     btn.classList.toggle("active") // Exchange active state on clicked button
-   })
- })
-
-// //Sort change event listener
-// document.querySelectorAll("input.sort-button").forEach(button => {
-//   button.addEventListener("change", function() {
-//       document.querySelectorAll(".sort-buttons").forEach(btn => {
-//           btn.style.background = ""; 
-//           btn.style.color = "";
-//       });
-      
-//       // Apply styles to the selected button's container
-//       if (this.checked) {
-//           this.closest(".sort-buttons").style.background = "#ff6589";
-//           this.closest(".sort-buttons").style.color = "white";
-//       }
-//   });
-// });
-
-// //Event Listeners for Filtering
-// filterAll.addEventListener("click", () => {
-//   const allRecipes = fetchedRecipes.filter(recipe => recipe)
-//   displayRecipes(fetchedRecipes)
-// })
-
-// filterVegan.addEventListener("click", () => {
-//   const veganRecipes = fetchedRecipes.filter(recipe => recipe.vegan)
-//   if (veganRecipes.length === 0){
-//     // Handle case where no recipes match
-//     recipeAPI.innerHTML ="Sorry, there are no vegan recipes"
-//   } else {
-//     displayRecipes(veganRecipes)
-//   }      
-// })
-
-// filterVeggi.addEventListener("click", () => {
-//   const vegRecipes = fetchedRecipes.filter(recipe => recipe.vegetarian)
-//   if (vegRecipes.length === 0){
-//     // Handle case where no recipes match
-//     displayNoResultsMessage.innerHTML ="Sorry,there are no vegetarian recipes"
-//   } else {
-//     displayRecipes(vegRecipes)
-//   }      
-// })
-
-// filterGluten.addEventListener("click", () => {
-//   const glutenFreeRecipes = fetchedRecipes.filter(recipe => recipe.glutenFree)
-//   if (glutenFreeRecipes.length === 0){
-//     displayNoResultsMessage.innerHTML ="Sorry,there are no gluten free recipes"
-//   } else {
-//     displayRecipes(glutenFreeRecipes)
-//   }
-// })
-
-// filterDairy.addEventListener("click", () => {
-//   const dairyFreeRecipes = fetchedRecipes.filter(recipe => recipe.dairyFree)
-//   if (dairyFreeRecipes.length === 0) {
-//     // Handle case where no recipes match
-//     displayNoResultsMessage.innerHTML ="Sorry,there are no dairy free recipes"
-//   } else {
-//     displayRecipes(dairyFreeRecipes)
-//   }
-// })
-
-// //Event listeners for sorting
-// sortAscending.addEventListener("change", () => {
-//   fetchedRecipes.sort((a, b) => a.spoonacularScore - b.spoonacularScore) 
-//   displayRecipes(fetchedRecipes)  
-// })
-// sortDescending.addEventListener("change", () => {
-//   fetchedRecipes.sort((a, b) => b.spoonacularScore - a.spoonacularScore)      
-//   displayRecipes(fetchedRecipes) 
-// })
-
-let currentFilter = null; // e.g., 'vegan', 'vegetarian', etc.
-let currentSort = null;   // 'asc' or 'desc'
-
+//Fuction to update filter
 function updateDisplayedRecipes() {  
   let filteredRecipes = [fetchedRecipes];  
 
   switch (currentFilter) {
     case 'vegan':
-      filteredRecipes = fetchedRecipes.filter(r => r.vegan);
+      filteredRecipes = fetchedRecipes.filter(recipe => recipe.vegan);
       break;
     case 'vegetarian':
-      filteredRecipes = fetchedRecipes.filter(r => r.vegetarian);
+      filteredRecipes = fetchedRecipes.filter(recipe => recipe.vegetarian);
       break;
     case 'glutenFree':
-      filteredRecipes = fetchedRecipes.filter(r => r.glutenFree);
+      filteredRecipes = fetchedRecipes.filter(recipe => recipe.glutenFree);
       break;
     case 'dairyFree':
-      filteredRecipes = fetchedRecipes.filter(r => r.dairyFree);
+      filteredRecipes = fetchedRecipes.filter(recipe => recipe.dairyFree);
       break;
     default:
       // no filtering
+      filteredRecipes = fetchedRecipes.filter(recipe => recipe);      
       break;
   }
 
@@ -278,6 +195,19 @@ filterDairy.addEventListener("click", (event) => {
   currentFilter = 'dairyFree';
   updateDisplayedRecipes();
 });
+
+//Filter click event listener to change color on filter buttons
+document.querySelectorAll(".filter-button").forEach((btn) => {
+  btn.addEventListener("click", (event) => {
+    event.preventDefault()
+    document.querySelectorAll(".filter-button").forEach((otherBtn) => {
+      if (otherBtn !== btn) {
+        otherBtn.classList.remove("active") // Remove active state on other buttons
+      }
+    })
+    btn.classList.toggle("active") // Exchange active state on clicked button
+  })
+})
 
 // Sort buttons
 sortAscending.addEventListener("change", () => {
